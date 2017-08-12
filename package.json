@@ -1,0 +1,17 @@
+{
+  "name": "dinner-tracker",
+  "version": "1.0.0",
+  "description": "This is an app which will record dinner time when the registered dash button is pressed.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Tarun K. Mall",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.97.0",
+    "moment": "^2.18.1",
+    "node-dash-button": "^0.6.1"
+  }
+}
