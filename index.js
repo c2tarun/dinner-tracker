@@ -56,7 +56,7 @@ var makeEntryInDynamoDB = function(error, success) {
 
 var sendSMS = function(dinnerTime) {
     var day = dinnerTime.format('YYYY-MMMM-DD');
-    var time = dinnerTime.format('h:mm:ss');
+    var time = dinnerTime.format('h:mm:ss A');
     var smsMessage = "Dinner time on " + day + " is " + time;
 
     console.log("SMS: " + smsMessage);
