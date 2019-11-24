@@ -6,6 +6,7 @@ var AWS = require('aws-sdk');
 var homeDirectory = process.env['HOME'];
 var config = readConfig(homeDirectory + '/.config/dinner-tracker/config');
 
+// Loading aws credentials
 var awsCredentials = new AWS.SharedIniFileCredentials({
     profile: 'dinner-tracker',
     filename: config.awsCredentials
@@ -16,12 +17,15 @@ AWS.config.update({
 });
 AWS.config.credentials = awsCredentials;
 
+// Creating dynamodb
 var dynamodb = new AWS.DynamoDB();
 dynamodb.setEndpoint('https://dynamodb.us-west-2.amazonaws.com');
 
+// Creating aws sns
 var sns = new AWS.SNS();
 sns.setEndpoint('https://sns.us-west-2.amazonaws.com');
 
+// Creating dash button instance
 var dinnerDash = dashButton(config.dinnerDashSSID, null, null, 'all');
 dinnerDash.on("detected", () => {
     makeEntryInDynamoDB((err) => {
@@ -32,6 +36,7 @@ dinnerDash.on("detected", () => {
     });
 });
 
+// Method will make an entry in dynamo db.
 var makeEntryInDynamoDB = function(error, success) {
     var seattleTime = moment.tz('America/Los_Angeles');
     console.log("Dinner Time " + seattleTime.format().toString());
@@ -54,6 +59,7 @@ var makeEntryInDynamoDB = function(error, success) {
     });
 }
 
+// Method will send an sms
 var sendSMS = function(dinnerTime) {
     var day = dinnerTime.format('YYYY-MMMM-DD');
     var time = dinnerTime.format('h:mm:ss A');
