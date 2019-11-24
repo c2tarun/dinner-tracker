@@ -21,7 +21,7 @@ AWS.config.credentials = awsCredentials;
 var dynamodb = new AWS.DynamoDB();
 dynamodb.setEndpoint('https://dynamodb.us-west-2.amazonaws.com');
 
-// Creating sns
+// Creating aws sns
 var sns = new AWS.SNS();
 sns.setEndpoint('https://sns.us-west-2.amazonaws.com');
 
