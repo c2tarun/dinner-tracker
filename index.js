@@ -12,6 +12,7 @@ var awsCredentials = new AWS.SharedIniFileCredentials({
     filename: config.awsCredentials
 });
 
+// Setting region
 AWS.config.update({
     region: 'us-west-2'
 });
@@ -50,6 +51,7 @@ var makeEntryInDynamoDB = function(error, success) {
     };
 
     console.log(params);
+    // Putting item in dynamo
     dynamodb.putItem(params, function(err, data) {
         if (err) {
             error(err);
